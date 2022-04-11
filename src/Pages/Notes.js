@@ -1,20 +1,28 @@
 import React from 'react'
-import Header from '../Components/Header'
+
 import ListItem from '../Components/ListItem'
 import AddButton from '../Components/AddButton'
 
 
 
-export default function Notes() {
-
-  
-  
-
+export default function Notes({notes}) {
   return (
-    <div>
+    <div className="notes">
+    <div className="notes-header">
+        <h2 className="notes-title">&#9782; Notes</h2>
+        <p className="notes-count">{notes.length}</p>
+    </div>
+
        
-    <Header />
-    <ListItem />
+    <div className="notes-list">
+   
+    {notes.map((note,index)=>( 
+      <ListItem key={index} note={note}></ListItem>
+      ))}
+    </div>
+      
+        
+         
     <AddButton />
     </div>
   )

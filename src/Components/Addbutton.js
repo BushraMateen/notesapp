@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Addbutton() {
   
   return (
-    <Link to="/note/new"><button type="button">
+    <Link to="/note/new" className="floating-button">><button type="button">
     Plus
 </button></Link>
     

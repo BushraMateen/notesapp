@@ -4,7 +4,8 @@ import Notes from './Pages/Notes';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Note from './Pages/Note';
 import {useState} from 'react';
-import ListItem from './Components/ListItem';
+
+import Header from './Components/Header';
 
 function App() {
 
@@ -15,17 +16,18 @@ function App() {
   }
   return(
     <Router>
+       <div className="container dark">
+        <div className="app">
+      <Header />
       <Routes>
-      <Route path="/" element={<Notes />}></Route>
+      <Route path="/" element={<Notes notes = {noteList} />}></Route>
       <Route path="/note/:id" element={<Note updateParentCounter={updateMyCounter} />}></Route>
-
+     
       </Routes>
-      {noteList.map((e,index)=>{
-       return (
-         <p key={index}>{e}</p>
-     );})}
-
+      </div>
+      </div>
     </Router>
+   
   );
 }
 
