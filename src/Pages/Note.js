@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
-
+import { ReactComponent as ArrowLeft } from '../assets/arrow-left.svg';
+import { useParams } from 'react-router-dom';
 
 export default function Note(props) {
 
   let [note,setNote]=useState({})
+  let noteId = useParams();
 
+
+  
 
   let handleChange = (e) => {
     //setNote(event.target.value);
@@ -23,24 +27,33 @@ export default function Note(props) {
      props.updateParentCounter(note);
      setNote('');
    }
-
+   
+   let handleDelete = () => {
+    props.handleDeletes(note.id)
+   
+   }  
 
   return (
     <div className="note">
       <div className="note-header">
         <h3>
-     <Link to="/"><button type="button">
-          Back
-      </button>
+     <Link to="/"><ArrowLeft  />
       </Link>
       </h3>
-     <Link to="/"><button onClick={handleClick}type="button">
-          Done
-      </button>
-      </Link>
+      {console.log("noteid",noteId)}
+      {noteId.id !== 'new' ? (
+        <button onClick={handleDelete}>Delete</button>
+      ) : (
+        <button onClick={handleClick}>
+        <Link to="/">Done</Link>
+        </button>
+      
+      )}
+      
+     
       </div>
      <textarea name="body"
-          onChange={handleChange}
+          onChange={handleChange} placeholder="Edit note" 
           value={note.body}/> 
    </div>
   )

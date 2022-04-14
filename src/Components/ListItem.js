@@ -11,7 +11,7 @@ export default function ListItem({note}) {
 
   let getTitle = (note) => {
    // console.log(note);
-    const title =note.body.split('\n')[0]
+    const title = note.body.split('\n')[0]
     //console.log('title:',title);
     //console.log("lenght:",title.length)
     if(title.length > 45) {
