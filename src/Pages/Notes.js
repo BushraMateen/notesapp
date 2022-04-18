@@ -17,7 +17,7 @@ export default function Notes({notes}) {
     <div className="notes-list">
    
     {notes.map((note,index)=>( 
-      <ListItem key={index} note={note}></ListItem>
+      <ListItem key={index} note={note} id={note.id}></ListItem>
       ))}
     </div>
       
