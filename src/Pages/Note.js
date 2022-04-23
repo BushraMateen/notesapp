@@ -17,47 +17,52 @@ export default function Note(props) {
   }
 
   let [note,setNote]=useState({
+    id: (noteId.id === 'new' ? props.noteid : noteId.id),
     body: data,
     updated: new Date(),
-    id: (noteId.id == 'new' ? props.noteid : noteId.id)
+    created: new Date()
+    
   })
 
 
   let handleChange = (e) => {
-    //setNote(event.target.value);
     setNote({ ...note, 'body': e.target.value });
   }
 
    let handleClick = () => {
-     //setNote({...note,'updated': new Date()})
-     //console.log('noteid:',noteid);
 
-    setNote(prevState => ({
-     note: {
-       ...prevState.note,
-       updated: new Date(),
-       id: props.noteid
-     }
-   }))
-
-   //console.log('useeffect note',note);
-
-   props.updateParentCounter(note);
-
-   setNote('');
-   
-   //console.log('noteid',noteid);
-
+   fetch('http://127.0.0.1:8000/api/notes/', {
+      method: "POST",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    })
+    //props.updateParentCounter(note);
+    props.updateNoteIds(note.id + 1);
    }
    
    let handleDelete = () => {
-     //console.log('handleDelete',note);
-    props.deleteNote(note)
+    fetch(`http://127.0.0.1:8000/api/notes/${noteId.id}/`, {
+      method: "DELETE",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    })
+     
    
    }  
 
    let handleArrowClick = () => {
-     console.log('handleArrowClick');
+    fetch(`http://127.0.0.1:8000/api/notes/${noteId.id}/`, {
+      method: "PUT",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    })
+    //props.updateNoteIds(noteId.id);
      props.updateNotes(note);
    }
 

@@ -20,9 +20,6 @@ export default function Notes({notes}) {
       <ListItem key={index} note={note} id={note.id}></ListItem>
       ))}
     </div>
-      
-        
-         
     <AddButton />
     </div>
   )
